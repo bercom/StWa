@@ -20,6 +20,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -27,5 +28,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class StWa implements EntryPoint {
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
+		
+		VerticalPanel mainPanel = new VerticalPanel();
+		rootPanel.add(mainPanel, 10, 10);
+		mainPanel.setSize("261px", "280px");
 	}
 }
