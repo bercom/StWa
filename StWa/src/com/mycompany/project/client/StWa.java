@@ -23,6 +23,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Label;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -40,5 +42,17 @@ public class StWa implements EntryPoint {
 		
 		HorizontalPanel addPanel = new HorizontalPanel();
 		mainPanel.add(addPanel);
+		addPanel.setSize("244px", "126px");
+		
+		TextBox newSymbolTextBox = new TextBox();
+		addPanel.add(newSymbolTextBox);
+		newSymbolTextBox.setWidth("134px");
+		
+		Button addButton = new Button("New button");
+		addButton.setText("Add");
+		addPanel.add(addButton);
+		
+		Label lastUpdatedLabel = new Label("New label");
+		mainPanel.add(lastUpdatedLabel);
 	}
 }
