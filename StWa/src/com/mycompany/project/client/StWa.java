@@ -44,6 +44,10 @@ public class StWa implements EntryPoint {
 		mainPanel.setSize("261px", "280px");
 		
 		stocksFlexTable = new FlexTable();
+		stocksFlexTable.setText(0, 0, "Symbol");
+		stocksFlexTable.setText(0, 1, "Price");
+		stocksFlexTable.setText(0, 2, "Change");
+		stocksFlexTable.setText(0, 3, "Remove");
 		mainPanel.add(stocksFlexTable);
 		
 		addPanel = new HorizontalPanel();
@@ -51,6 +55,7 @@ public class StWa implements EntryPoint {
 		addPanel.setSize("244px", "126px");
 		
 		newSymbolTextBox = new TextBox();
+		newSymbolTextBox.setFocus(true);
 		addPanel.add(newSymbolTextBox);
 		newSymbolTextBox.setWidth("134px");
 		
