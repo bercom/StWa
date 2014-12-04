@@ -41,28 +41,29 @@ public class StWa implements EntryPoint {
 	private TextBox newSymbolTextBox;
 	private Button addButton;
 	private Label lastUpdatedLabel;
+
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
-		
+
 		mainPanel = new VerticalPanel();
 		rootPanel.add(mainPanel, 10, 10);
 		mainPanel.setSize("261px", "280px");
-		
+
 		stocksFlexTable = new FlexTable();
 		stocksFlexTable.setText(0, 0, "Symbol");
 		stocksFlexTable.setText(0, 1, "Price");
 		stocksFlexTable.setText(0, 2, "Change");
 		stocksFlexTable.setText(0, 3, "Remove");
 		mainPanel.add(stocksFlexTable);
-		
+
 		addPanel = new HorizontalPanel();
 		mainPanel.add(addPanel);
 		addPanel.setSize("244px", "126px");
-		
+
 		newSymbolTextBox = new TextBox();
 		newSymbolTextBox.addKeyPressHandler(new KeyPressHandler() {
 			public void onKeyPress(KeyPressEvent event) {
-				if (event.getCharCode() == KeyCodes.KEY_ENTER){
+				if (event.getCharCode() == KeyCodes.KEY_ENTER) {
 					addStock();
 				}
 			}
@@ -70,7 +71,7 @@ public class StWa implements EntryPoint {
 		newSymbolTextBox.setFocus(true);
 		addPanel.add(newSymbolTextBox);
 		newSymbolTextBox.setWidth("134px");
-		
+
 		addButton = new Button("New button");
 		addButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -79,12 +80,29 @@ public class StWa implements EntryPoint {
 		});
 		addButton.setText("Add");
 		addPanel.add(addButton);
-		
+
 		lastUpdatedLabel = new Label("New label");
 		mainPanel.add(lastUpdatedLabel);
 	}
+
 	private void addStock() {
-		// TODO Auto-generated method stub
-		
+		final String symbol = newSymbolTextBox.getText().toUpperCase().trim();
+
+		newSymbolTextBox.setFocus(true);
+
+		// Stock code must be between 1 and 10 chars that are numbers, letters,
+		// or dots.
+		if (!symbol.matches("^[0-9A-Z\\.]{1,10}$")) {
+			Window.alert("'" + symbol + "' is not a valid symbol.");
+			newSymbolTextBox.selectAll();
+			return;
+		}
+
+		newSymbolTextBox.setText("");
+
+		// TODO Don't add the stock if it's already in the table.
+		// TODO Add the stock to the table.
+		// TODO Add a button to remove this stock from the table.
+		// TODO Get the stock price.}
 	}
 }
