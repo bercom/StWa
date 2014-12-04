@@ -30,29 +30,35 @@ import com.google.gwt.user.client.ui.Label;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class StWa implements EntryPoint {
+	private VerticalPanel mainPanel;
+	private FlexTable stocksFlexTable;
+	private HorizontalPanel addPanel;
+	private TextBox newSymbolTextBox;
+	private Button addButton;
+	private Label lastUpdatedLabel;
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
 		
-		VerticalPanel mainPanel = new VerticalPanel();
+		mainPanel = new VerticalPanel();
 		rootPanel.add(mainPanel, 10, 10);
 		mainPanel.setSize("261px", "280px");
 		
-		FlexTable stocksFlexTable = new FlexTable();
+		stocksFlexTable = new FlexTable();
 		mainPanel.add(stocksFlexTable);
 		
-		HorizontalPanel addPanel = new HorizontalPanel();
+		addPanel = new HorizontalPanel();
 		mainPanel.add(addPanel);
 		addPanel.setSize("244px", "126px");
 		
-		TextBox newSymbolTextBox = new TextBox();
+		newSymbolTextBox = new TextBox();
 		addPanel.add(newSymbolTextBox);
 		newSymbolTextBox.setWidth("134px");
 		
-		Button addButton = new Button("New button");
+		addButton = new Button("New button");
 		addButton.setText("Add");
 		addPanel.add(addButton);
 		
-		Label lastUpdatedLabel = new Label("New label");
+		lastUpdatedLabel = new Label("New label");
 		mainPanel.add(lastUpdatedLabel);
 	}
 }
