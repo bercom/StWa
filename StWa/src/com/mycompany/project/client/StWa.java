@@ -83,7 +83,7 @@ public class StWa implements EntryPoint {
 		lastUpdatedLabel = new Label("New label");
 		mainPanel.add(lastUpdatedLabel);
 	}
-	protected void addStock() {
+	private void addStock() {
 		// TODO Auto-generated method stub
 		
 	}
