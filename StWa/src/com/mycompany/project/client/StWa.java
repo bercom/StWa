@@ -25,6 +25,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -55,15 +57,29 @@ public class StWa implements EntryPoint {
 		addPanel.setSize("244px", "126px");
 		
 		newSymbolTextBox = new TextBox();
+		newSymbolTextBox.addKeyDownHandler(new KeyDownHandler() {
+			public void onKeyDown(KeyDownEvent event) {
+				addStock();
+			}
+		});
 		newSymbolTextBox.setFocus(true);
 		addPanel.add(newSymbolTextBox);
 		newSymbolTextBox.setWidth("134px");
 		
 		addButton = new Button("New button");
+		addButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				addStock();
+			}
+		});
 		addButton.setText("Add");
 		addPanel.add(addButton);
 		
 		lastUpdatedLabel = new Label("New label");
 		mainPanel.add(lastUpdatedLabel);
+	}
+	protected void addStock() {
+		// TODO Auto-generated method stub
+		
 	}
 }
