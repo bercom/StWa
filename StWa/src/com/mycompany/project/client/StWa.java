@@ -14,6 +14,8 @@
  *******************************************************************************/
 package com.mycompany.project.client;
 
+import java.util.ArrayList;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -41,6 +43,7 @@ public class StWa implements EntryPoint {
 	private TextBox newSymbolTextBox;
 	private Button addButton;
 	private Label lastUpdatedLabel;
+	private ArrayList <String> stocks = new ArrayList<String>();
 
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
@@ -87,12 +90,11 @@ public class StWa implements EntryPoint {
 
 	private void addStock() {
 		final String symbol = newSymbolTextBox.getText().toUpperCase().trim();
-
 		newSymbolTextBox.setFocus(true);
 
-		// Stock code must be between 1 and 10 chars that are numbers, letters,
-		// or dots.
-		if (!symbol.matches("^[0-9A-Z\\.]{1,10}$")) {
+		// symbol must be between 1 and 10 chars that are numbers, letters, or
+		// dots
+		if (!symbol.matches("^[0-9a-zA-Z\\.]{1,10}$")) {
 			Window.alert("'" + symbol + "' is not a valid symbol.");
 			newSymbolTextBox.selectAll();
 			return;
@@ -100,9 +102,24 @@ public class StWa implements EntryPoint {
 
 		newSymbolTextBox.setText("");
 
-		// TODO Don't add the stock if it's already in the table.
-		// TODO Add the stock to the table.
-		// TODO Add a button to remove this stock from the table.
-		// TODO Get the stock price.}
+		// don't add the stock if it's already in the watch list
+		if (stocks.contains(symbol))
+			return;
+
+		// add the stock to the list
+		int row = stocksFlexTable.getRowCount();
+		stocks.add(symbol);
+		stocksFlexTable.setText(row, 0, symbol);
+
+		// add button to remove this stock from the list
+		Button removeStock = new Button("x");
+		removeStock.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				int removedIndex = stocks.indexOf(symbol);
+				stocks.remove(removedIndex);
+				stocksFlexTable.removeRow(removedIndex + 1);
+			}
+		});
+		stocksFlexTable.setWidget(row, 3, removeStock);
 	}
 }
