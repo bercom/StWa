@@ -118,7 +118,7 @@ public class StWa implements EntryPoint {
 
 		newSymbolTextBox.setText("");
 
-		// don't add the stock if it's already in the watch list
+		// don't add the stock if it's already in the watch list - would be waste of time...
 		if (stocks.contains(symbol))
 			return;
 
