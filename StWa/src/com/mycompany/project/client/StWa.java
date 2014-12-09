@@ -20,6 +20,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -37,6 +38,7 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class StWa implements EntryPoint {
+	private static final int REFRESH_INTERVAL = 5000;	
 	private VerticalPanel mainPanel;
 	private FlexTable stocksFlexTable;
 	private HorizontalPanel addPanel;
@@ -86,6 +88,20 @@ public class StWa implements EntryPoint {
 
 		lastUpdatedLabel = new Label("New label");
 		mainPanel.add(lastUpdatedLabel);
+		
+		// setup timer to refresh list automatically
+		Timer refreshTimer = new Timer() {
+			public void run()
+			{
+				refreshWatchList();
+			}
+		};
+		refreshTimer.scheduleRepeating(REFRESH_INTERVAL);
+	}
+
+	protected void refreshWatchList() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void addStock() {
