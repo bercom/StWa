@@ -64,6 +64,7 @@ public class StWa implements EntryPoint {
 		mainPanel.add(image);
 		
 		lblNewLabel = new Label("Stock Watcher");
+		lblNewLabel.setStyleName("gwt-Label-StockWatcher");
 		mainPanel.add(lblNewLabel);
 
 		stocksFlexTable = new FlexTable();
