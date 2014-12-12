@@ -15,24 +15,27 @@
 package com.mycompany.project.client;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.mycompany.project.client.project.client.StockPrice;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -99,9 +102,53 @@ public class StWa implements EntryPoint {
 		refreshTimer.scheduleRepeating(REFRESH_INTERVAL);
 	}
 
-	protected void refreshWatchList() {
-		// TODO Auto-generated method stub
-		
+	private void refreshWatchList(){
+		final double MAX_PRICE = 100.0; // $100.00
+		final double MAX_PRICE_CHANGE = 0.02; // +/- 2%
+
+		StockPrice[] prices = new StockPrice[stocks.size()];
+		for (int i = 0; i < stocks.size(); i++)
+		{
+			double price = Random.nextDouble() * MAX_PRICE;
+			double change = price * MAX_PRICE_CHANGE
+					* (Random.nextDouble() * 2.0 - 1.0);
+
+			prices[i] = new StockPrice((String) stocks.get(i), price, change);
+		}
+
+		updateTable(prices);
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void updateTable(StockPrice[] prices){
+		for (int i = 0; i < prices.length; i++)
+		{
+			updateTable(prices[i]);
+		}
+
+		// change the last update timestamp
+		lastUpdatedLabel.setText("Last update : "
+			+ DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
+	}
+
+	private void updateTable(StockPrice stockPrice)	{
+		// make sure the stock is still in our watch list
+		if (!stocks.contains(stockPrice.getSymbol()))
+		{
+			return;
+		}
+
+		int row = stocks.indexOf(stockPrice.getSymbol()) + 1;
+
+		// Format the data in the Price and Change fields.
+		String priceText = NumberFormat.getFormat("#,##0.00").format(stockPrice.getPrice());
+		NumberFormat changeFormat = NumberFormat.getFormat("+#,##0.00;-#,##0.00");
+		String changeText = changeFormat.format(stockPrice.getChange());
+		String changePercentText = changeFormat.format(stockPrice.getChangePercent());
+
+		// Populate the Price and Change fields with new data.
+		stocksFlexTable.setText(row, 1, priceText);
+		stocksFlexTable.setText(row, 2, changeText + " (" + changePercentText + "%)");
 	}
 
 	private void addStock() {
