@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.mycompany.project.client.project.client.StockPrice;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -49,6 +50,7 @@ public class StWa implements EntryPoint {
 	private Button addButton;
 	private Label lastUpdatedLabel;
 	private ArrayList <String> stocks = new ArrayList<String>();
+	private Image image;
 
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
@@ -56,6 +58,9 @@ public class StWa implements EntryPoint {
 		mainPanel = new VerticalPanel();
 		rootPanel.add(mainPanel, 10, 10);
 		mainPanel.setSize("261px", "280px");
+		
+		image = new Image("images/googlecode.png");
+		mainPanel.add(image);
 
 		stocksFlexTable = new FlexTable();
 		stocksFlexTable.setText(0, 0, "Symbol");
