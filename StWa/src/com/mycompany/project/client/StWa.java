@@ -51,6 +51,7 @@ public class StWa implements EntryPoint {
 	private Label lastUpdatedLabel;
 	private ArrayList <String> stocks = new ArrayList<String>();
 	private Image image;
+	private Label lblNewLabel;
 
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
@@ -61,6 +62,9 @@ public class StWa implements EntryPoint {
 		
 		image = new Image("images/googlecode.png");
 		mainPanel.add(image);
+		
+		lblNewLabel = new Label("Stock Watcher");
+		mainPanel.add(lblNewLabel);
 
 		stocksFlexTable = new FlexTable();
 		stocksFlexTable.setText(0, 0, "Symbol");
