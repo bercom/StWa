@@ -91,6 +91,7 @@ public class StWa implements EntryPoint {
 		newSymbolTextBox.setWidth("134px");
 
 		addButton = new Button("New button");
+		addButton.setStyleName("gwt-Button-Add");
 		addButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				addStock();
